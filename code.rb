@@ -38,7 +38,7 @@ recipe_template = <<-ERB
 Ingredients
 -----------
 <% ingredients.each do |ingredient| %>
-<%= ingredient %>
+<%= ingredient -%>
 <% end %>
 
 Directions
@@ -50,5 +50,5 @@ Directions
 
 ERB
 
-erb = ERB.new(recipe_template)
+erb = ERB.new(recipe_template, nil, '-')
 puts erb.result
