@@ -25,11 +25,9 @@ recipe = {
 
 recipe_title = "Recipe: #{recipe[:name]}"
 
-ingredients = ""
-recipe[:ingredients].each {|ingredient| ingredients += "#{ingredient}\n"}
+ingredients = recipe[:ingredients]
 
-directions = ""
-recipe[:directions].each_with_index {|direction, index| directions += "#{index+1}. #{direction}\n\n"}
+directions = recipe[:directions]
 
 recipe_template = <<-ERB
 
@@ -39,13 +37,16 @@ recipe_template = <<-ERB
 
 Ingredients
 -----------
-
-<%= ingredients %>
+<% ingredients.each do |ingredient| %>
+<%= ingredient %>
+<% end %>
 
 Directions
 ----------
+<% recipe[:directions].each_with_index do |direction, index| %>
+<%= index+1 %>. <%= direction %>
+<% end %>
 
-<%= directions %>
 
 ERB
 
